@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/*
+ * DESIGN TOKENS
+ * Change the colours here and they update across the whole site.
+ */
+@theme {
+  --color-paper: #f6f3ec; /* off-white background */
+  --color-paper-deep: #ece7dc; /* slightly darker panels */
+  --color-ink: #161513; /* near-black text */
+  --color-ink-soft: #3d3a35;
+  --color-muted: #6f695f; /* captions, dates */
+  --color-line: #d9d2c4; /* hairline rules */
+  --color-accent: #b4532a; /* the one accent colour: Lagos-laterite terracotta */
+  --color-accent-deep: #8f3f1d;
+
+  --font-serif: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --tracking-label: 0.14em;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Small uppercase label: "LAGOS · CITY GUIDES" */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+  }
+
+  /* Underline that grows on hover, used for text links */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms ease;
+  }
+  .link-underline:hover,
+  .group:hover .link-underline {
+    background-size: 100% 1px;
+  }
+
+  /* ---------- Article body typography ---------- */
+  .article-body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink-soft);
+  }
+  @media (min-width: 768px) {
+    .article-body {
+      font-size: 1.125rem;
+    }
+  }
+  .article-body > * + * {
+    margin-top: 1.5em;
+  }
+  /* Opening paragraph reads like a magazine standfirst */
+  .article-body > p:first-of-type {
+    font-family: var(--font-serif);
+    font-size: 1.375em;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+  .article-body h2 {
+    font-family: var(--font-serif);
+    font-size: 1.75em;
+    line-height: 1.2;
+    font-weight: 400;
+    color: var(--color-ink);
+    margin-top: 2.25em;
+    letter-spacing: -0.01em;
+  }
+  .article-body h3 {
+    font-family: var(--font-sans);
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--color-ink);
+    margin-top: 2.5em;
+  }
+  .article-body h2 + *,
+  .article-body h3 + * {
+    margin-top: 0.75em;
+  }
+  .article-body a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 150ms ease;
+  }
+  .article-body a:hover {
+    color: var(--color-accent);
+  }
+  .article-body strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1.25em;
+  }
+  .article-body ul {
+    list-style: disc;
+  }
+  .article-body ol {
+    list-style: decimal;
+  }
+  .article-body li + li {
+    margin-top: 0.5em;
+  }
+  .article-body li::marker {
+    color: var(--color-accent);
+  }
+  .article-body blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25em;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.2em;
+    color: var(--color-ink);
+  }
+  .article-body hr {
+    border: 0;
+    margin: 3em auto;
+    width: 3rem;
+    border-top: 1px solid var(--color-line);
+  }
+  /* Photos and boxes get extra breathing room */
+  .article-body > figure,
+  .article-body > aside {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+  }
+  .article-body > figure + *,
+  .article-body > aside + * {
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
